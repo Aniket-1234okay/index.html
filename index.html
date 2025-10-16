@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draggable Transparent GIF</title>
+    <title>Draggable Transparent Animation</title>
 
     <style>
         body {
-            /* Colorful background to test transparency */
-            background: linear-gradient(135deg, #a8dadc, #457b9d);
+            /* Colorful background to easily demonstrate the GIF's transparency */
+            background: linear-gradient(135deg, #f7b267, #f79d65);
             min-height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
             padding: 20px;
         }
+
         .page-content {
             max-width: 800px;
             margin: 0 auto;
@@ -26,26 +27,26 @@
         }
 
         /* 1. CSS for the Floating Draggable Container */
-        #draggable-video-container {
-            /* Crucial for movement */
+        #draggable-element-container {
+            /* CRUCIAL: Allows moving relative to the viewport */
             position: fixed; 
             z-index: 9999;   
-            width: 300px;    
+            width: 300px;    /* Set a reasonable display size */
             height: auto;
             top: 100px;      
             right: 100px;
             cursor: grab; 
-            border: 2px dashed #e63946; 
+            border: 2px dashed #354f52; /* Visual confirmation border */
             border-radius: 10px;
             overflow: hidden; 
         }
 
-        /* 2. CSS for the Image Element (GIF) */
+        /* 2. CSS for the GIF Image Element */
         #my-transparent-gif {
             width: 100%;
             height: 100%;
             display: block;
-            /* Prevents the image from being "saved" when dragged */
+            /* Prevents the image from being selected/saved when dragging */
             pointer-events: none; 
         }
     </style>
@@ -53,35 +54,43 @@
 <body>
 
     <div class="page-content">
-        <h1>Success! Your Draggable GIF Animation is Ready!</h1>
-        <p>The **GIF format** natively supports transparency, which is why this approach works best. You should now see the animation inside the red dashed box and be able to drag it around.</p>
+        <h1>Your Draggable Animation is Here! ✨</h1>
+        <p>This animation is loading directly from your Cloudinary link. You should now see the transparent GIF inside the dashed box and be able to drag it around the screen.</p>
+        <p>Click the dashed border and move your mouse to position the animation wherever you like.</p>
     </div>
 
-    <div id="draggable-video-container" class="floating-video">
+    <div id="draggable-element-container">
         <img 
             id="my-transparent-gif" 
-            src="https://res.cloudinary.com/dcjfxzkk4/image/upload/v1760640998/Hailuo_Video_make_this_girl_dance_435302143143821320_fsugvn.gif" 
-            alt="Girl dancing GIF">
+            src="https://res.cloudinary.com/dcjfxzkk4/image/upload/v1760643436/Anime-Girl-Dancing-Video-Gener-unscreen_tvgzlp.gif" 
+            alt="Anime girl dancing GIF"
+            draggable="false">
     </div>
 
     <script>
-        const draggable = document.getElementById('draggable-video-container');
+        const draggable = document.getElementById('draggable-element-container');
         let isDragging = false;
         let offsetX, offsetY;
 
         draggable.addEventListener('mousedown', (e) => {
             e.preventDefault(); 
             isDragging = true;
+            
+            // Calculate offset from the element's top-left corner
             offsetX = e.clientX - draggable.getBoundingClientRect().left;
             offsetY = e.clientY - draggable.getBoundingClientRect().top;
+            
             draggable.style.cursor = 'grabbing';
         });
 
         document.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
+            
+            // Calculate the new position
             let newX = e.clientX - offsetX;
             let newY = e.clientY - offsetY;
             
+            // Apply the position to move the element
             draggable.style.left = newX + 'px';
             draggable.style.top = newY + 'px';
         });
