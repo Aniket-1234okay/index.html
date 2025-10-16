@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draggable Transparent Animation</title>
+    <title>Draggable Animation Final</title>
 
     <style>
         body {
-            /* Colorful background to easily demonstrate the video's transparency */
+            /* Colorful background to test transparency */
             background: linear-gradient(135deg, #a8dadc, #457b9d);
             min-height: 100vh;
             margin: 0;
@@ -34,7 +34,7 @@
             top: 100px;      
             right: 100px;
             cursor: grab; 
-            /* This is the box you see, which is correctly movable */
+            /* Red dashed border for visual confirmation */
             border: 2px dashed #e63946; 
             border-radius: 10px;
             overflow: hidden; 
@@ -52,8 +52,9 @@
 <body>
 
     <div class="page-content">
-        <h1>My Draggable Animation is Working!</h1>
-        <p>This transparent animation is being served by Cloudinary and can be dragged around the page. You should now see the video appearing inside the dashed box.</p>
+        <h1>Success! Your Draggable Animation is Ready!</h1>
+        <p>This animation is now being loaded directly from Cloudinary. Click the dashed box and drag it anywhere on the page.</p>
+        <p>If you see a solid background (black/white), the video is an MP4 file. To achieve transparency, you need a **WebM** file with an alpha channel and must use the `.webm` extension in the source URL.</p>
     </div>
 
     <div id="draggable-video-container" class="floating-video">
@@ -63,13 +64,13 @@
             loop 
             muted 
             playsinline 
-            alt="Transparent girl animation">
+            alt="Girl dancing animation">
             
             <source 
-                src="https://res.cloudinary.com/dcjfxzkk4/video/upload/Hailuo-Video-make-this-girl-da-unscreen_nuqwsl.webm" 
-                type="video/webm">
+                src="https://res.cloudinary.com/dcjfxzkk4/video/upload/v1760640998/Hailuo_Video_make_this_girl_dance_435302143143821320_fsugvn.mp4" 
+                type="video/mp4">
             
-            <p>Your browser does not support the WebM video format.</p>
+            <p>Your browser does not support the MP4 video format.</p>
         </video>
     </div>
 
@@ -104,7 +105,7 @@
             const video = document.getElementById('my-transparent-video');
             if (video.paused) {
                 video.play().catch(error => {
-                    console.warn("Autoplay was blocked. Drag-and-drop works, but video may require a tap to start.");
+                    console.warn("Autoplay was blocked.");
                 });
             }
         });
